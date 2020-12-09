@@ -175,7 +175,7 @@ storiesOf("Appointment", module)
     <Form
       setName={action("setName")}
       interviewers={interviewers}
-      setInterviewer={action("setInterviewer")}
+      setInterviewer={(event) => action("setInterviewer")(interviewer.id)}
       onSave={action("onSave")}
       onCancel={action("onCancel")}
     />
