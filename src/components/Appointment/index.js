@@ -4,12 +4,13 @@ import "./styles.scss";
 import Header from "./Header";
 import Empty from "./Empty";
 import Show from "./Show";
-import Confirm from "./Confirm";
-import Status from "./Status";
-import Error from "./Error";
-import Form from "./Form";
+// import Confirm from "./Confirm";
+// import Status from "./Status";
+// import Error from "./Error";
+// import Form from "./Form";
 
 export default function Appointment(props) {
+  // console.log("props", props);
   let status;
   if (!props.interview) {
     status = <Empty />;

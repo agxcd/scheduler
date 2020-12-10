@@ -1,14 +1,14 @@
-export default function getAppointmentsForDay(state, day) {
+function getAppointmentsForDay(state, day) {
   const appointmentForDay = [];
   const eachDayArray = state.days.filter((thisDay) => day === thisDay.name);
-  console.log("eachDayArray", eachDayArray);
+  // console.log("eachDayArray", eachDayArray);
   if (eachDayArray === [] || !day || eachDayArray[0] === undefined) {
     return [];
   }
   const appsArrForDay = eachDayArray[0].appointments;
   // console.log(appsArrForDay)
   for (const appointment of Object.values(state.appointments)) {
-    console.log("object", appointment);
+    // console.log("object", appointment);
     if (appsArrForDay.includes(appointment.id)) {
       // console.log('appointment.id',appointment.id)
       appointmentForDay.push(appointment);
@@ -17,3 +17,22 @@ export default function getAppointmentsForDay(state, day) {
   //  console.log('appointmentForDay',appointmentForDay)
   return appointmentForDay;
 }
+
+function getInterview(state, interview) {
+  if (interview === null || !interview) {
+    return null;
+  }
+  // console.log(Object.values(state.interviewers));
+  for (const interviewer of Object.values(state.interviewers)) {
+    if (interviewer.id === interview.interviewer) {
+      // console.log(interviewer);
+      // console.log({ student: interview.student, interviewer: interviewer });
+      return { student: interview.student, interviewer: interviewer };
+    }
+  }
+}
+
+module.exports = {
+  getAppointmentsForDay,
+  getInterview,
+};
