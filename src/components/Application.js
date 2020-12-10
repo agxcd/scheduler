@@ -24,16 +24,10 @@ export default function Application(props) {
       setState((prev) => ({
         ...prev,
         days: all[0].data,
-        appointments: all[0].data,
+        appointments: all[1].data,
       }));
     });
   }, []);
-  // useEffect(() => {
-  //   axios.get("http://localhost:8001/api/days").then((response) => {
-  //     console.log(response.data);
-  //     setDays(response.data);
-  //   });
-  // }, []);
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const schedule = dailyAppointments.map((appointment) => {
