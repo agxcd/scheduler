@@ -32,7 +32,34 @@ function getInterview(state, interview) {
   }
 }
 
+function getInterviewersForDay(state, day) {
+  const interviewerList = [];
+  const eachDayinterviewersArray = state.days.filter(
+    (thisDay) => day === thisDay.name
+  );
+
+  if (
+    eachDayinterviewersArray === [] ||
+    !day ||
+    eachDayinterviewersArray[0] === undefined
+  ) {
+    return [];
+  }
+  // console.log("getInterviewersForDay1", eachDayinterviewersArray);
+
+  const { interviewers } = eachDayinterviewersArray[0];
+  // console.log("getInterviewersForDay2", interviewers);
+  // console.log("state interviewer", state.interviewers);
+  for (const interviewer of interviewers) {
+    // console.log("getInterviewersForDay3", interviewer);
+    interviewerList.push(state.interviewers[interviewer]);
+  }
+  // console.log("getInterviewersForDay4", interviewerList);
+  return interviewerList;
+}
+
 module.exports = {
   getAppointmentsForDay,
   getInterview,
+  getInterviewersForDay,
 };
