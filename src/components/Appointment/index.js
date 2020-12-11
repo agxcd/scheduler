@@ -7,29 +7,34 @@ import Show from "./Show";
 // import Confirm from "./Confirm";
 // import Status from "./Status";
 // import Error from "./Error";
-// import Form from "./Form";
+import Form from "./Form";
+
+import useVisualMode from "../../hooks/useVisualMode";
+
+const EMPTY = "EMPTY";
+const SHOW = "SHOW";
+const CREATE = "CREATE";
 
 export default function Appointment(props) {
-  // console.log("props", props);
-  let status;
-  if (!props.interview) {
-    status = <Empty />;
-  } else {
-    status = (
-      <Show
-        student={props.interview.student}
-        interviewer={props.interview.interviewer.name}
-      />
-    );
-  }
+  const { mode, transition, back } = useVisualMode(
+    props.interview ? SHOW : EMPTY
+  );
+
   return (
     <article className="appointment">
       <Header time={props.time} />
-      {status}
+      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+      {mode === SHOW && (
+        <Show
+          student={props.interview.student}
+          interviewer={props.interview.interviewer.name}
+        />
+      )}
+      {mode === CREATE && <Form interviewers={[]} onCancel={() => back()} />}
       {/* <Confirm />
       <Status />
       <Error />
-      <Form /> */}
+       */}
     </article>
   );
 }
