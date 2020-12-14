@@ -30,14 +30,12 @@ export default function Appointment(props) {
       student: name,
       interviewer,
     };
-    props.bookInterview(props.id, interview);
-    transition(SHOW);
+    props.bookInterview(props.id, interview).then(() => transition(SHOW));
   }
 
   function deleteInterview() {
     transition(DELETING);
-    props.cancelInterview(props.id);
-    transition(EMPTY);
+    props.cancelInterview(props.id).then(() => transition(EMPTY));
   }
 
   return (

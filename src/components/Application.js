@@ -29,17 +29,16 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment,
     };
-    setState({
-      ...state,
-      appointments,
-    });
+    // setState({
+    //   ...state,
+    //   appointments,
+    // });
 
-    // return axios
-    //   .put("http://localhost:8001/api/appointments/:id", appointments)
-    //   .then(() => {
-    //     setState((prev) => ({ ...prev, appointments }));
-    //     // console.log("interview");
-    //   });
+    return axios
+      .put(`http://localhost:8001/api/appointments/${id}`, appointment)
+      .then(() => {
+        setState(() => ({ ...state, appointments }));
+      });
   }
 
   function cancelInterview(id) {
@@ -51,7 +50,11 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment,
     };
-    setState((prev) => ({ ...prev, appointments }));
+    return axios
+      .delete(`http://localhost:8001/api/appointments/${id}`)
+      .then(() => {
+        setState(() => ({ ...state, appointments }));
+      });
   }
   const setDay = (day) => setState({ ...state, day });
 
