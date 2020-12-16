@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 
 export default function useApplicationData() {
@@ -8,8 +8,16 @@ export default function useApplicationData() {
     appointments: {},
     interviewers: {},
   });
-
   const setDay = (day) => setState({ ...state, day });
+
+  function spotRemain(state, day, diff) {
+    const matchDay = state.days.find((e) => e.name === day);
+    if (diff === "+") {
+      matchDay.spots += 1;
+    } else if (diff === "-") {
+      matchDay.spots -= 1;
+    }
+  }
 
   function bookInterview(id, interview) {
     const appointment = {
@@ -24,6 +32,7 @@ export default function useApplicationData() {
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, appointment)
       .then(() => {
+        spotRemain(state, state.day, "-");
         setState(() => ({ ...state, appointments }));
       });
   }
@@ -40,6 +49,7 @@ export default function useApplicationData() {
     return axios
       .delete(`http://localhost:8001/api/appointments/${id}`)
       .then(() => {
+        spotRemain(state, state.day, "+");
         setState(() => ({ ...state, appointments }));
       });
   }
