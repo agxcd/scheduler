@@ -1,9 +1,9 @@
 # Interview Scheduler
 
-(https://github.com/agxcd/scheduler/scheduler/blob/master/doc/scheduler-1.png)
-(https://github.com/agxcd/scheduler/scheduler/blob/master/doc/scheduler-2.png)
-(https://github.com/agxcd/scheduler/scheduler/blob/master/doc/scheduler-3.png)
-(https://github.com/agxcd/scheduler/scheduler/blob/master/doc/scheduler-4.png)
+![ScreenShot](https://github.com/agxcd/scheduler/scheduler/blob/master/doc/scheduler-1.png)
+![ScreenShot](https://github.com/agxcd/scheduler/scheduler/blob/master/doc/scheduler-2.png)
+![ScreenShot](https://github.com/agxcd/scheduler/scheduler/blob/master/doc/scheduler-3.png)
+![ScreenShot](https://github.com/agxcd/scheduler/scheduler/blob/master/doc/scheduler-4.png)
 
 ## Setup
 
