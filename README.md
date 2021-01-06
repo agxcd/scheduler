@@ -21,8 +21,18 @@ npm start
 npm test
 ```
 
+"http://localhost:8000",
+
 ## Running Storybook Visual Testbed
 
 ```sh
 npm run storybook
 ```
+
+## Environment
+
+download the following git repo as the server
+
+https://github.com/agxcd/scheduler-api
+
+##
