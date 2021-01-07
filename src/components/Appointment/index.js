@@ -38,6 +38,18 @@ export default function Appointment(props) {
       .catch((error) => transition(ERROR_SAVE, true));
   }
 
+  function edit(name, interviewer) {
+    transition(SAVING);
+    const interview = {
+      student: name,
+      interviewer,
+    };
+    props
+      .editInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch((error) => transition(ERROR_SAVE, true));
+  }
+
   function deleteInterview() {
     transition(DELETING, true);
     props
@@ -63,7 +75,7 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           bookInterview={props.bookInterview}
           onSave={save}
-          onCancel={() => back()}
+          onCancel={back}
         />
       )}
       {mode === SAVING && <Status message="Saving" />}
@@ -71,7 +83,7 @@ export default function Appointment(props) {
       {mode === CONFIRM && (
         <Confirm
           message="Are you sure you would like to delete?"
-          onCancel={() => back()}
+          onCancel={back}
           onConfirm={deleteInterview}
         />
       )}
@@ -79,21 +91,15 @@ export default function Appointment(props) {
         <Form
           interviewers={props.interviewers}
           bookInterview={props.bookInterview}
-          onSave={save}
-          onCancel={() => back()}
+          onSave={edit}
+          onCancel={back}
         />
       )}
       {mode === ERROR_SAVE && (
-        <Error
-          message="ERROR ON SAVE, PLEASE TRT AGAIN"
-          onClose={() => back()}
-        />
+        <Error message="ERROR ON SAVE, PLEASE TRT AGAIN" onClose={back} />
       )}
       {mode === ERROR_DELETE && (
-        <Error
-          message="ERROR ON DELETE, PLEASE TRT AGAIN"
-          onClose={() => back()}
-        />
+        <Error message="ERROR ON DELETE, PLEASE TRT AGAIN" onClose={back} />
       )}
     </article>
   );

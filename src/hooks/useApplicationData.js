@@ -37,6 +37,24 @@ export default function useApplicationData() {
       });
   }
 
+  function editInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    return axios
+      .put(`http://localhost:8001/api/appointments/${id}`, appointment)
+      .then(() => {
+        spotRemain(state, state.day, "0");
+        setState(() => ({ ...state, appointments }));
+      });
+  }
+
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
@@ -73,5 +91,5 @@ export default function useApplicationData() {
       });
   }, []);
 
-  return { state, setDay, bookInterview, cancelInterview };
+  return { state, setDay, bookInterview, cancelInterview, editInterview };
 }
